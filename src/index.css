@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+input:active{
+    text-decoration: none;
+}
+
+.react-flow__edge-textbg {
+    fill: #F5F5F5 !important;
+  }
