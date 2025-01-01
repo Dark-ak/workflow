@@ -18,11 +18,12 @@ const UserNode = () => {
     const { addNode } = useWorkFlowStore((state) => state)
 
     const handleAddNode = (event) => {
+        const id = Date.now().toString()
         event.preventDefault()
         const newNode = {
-            id: Date.now().toString(),
+            id: id,
             position: { x: parseFloat(Math.random() * 100), y: parseFloat(100) },
-            data: { label: label, shape: shape, color: color, et: et },
+            data: {id:id, label: label, shape: shape, color: color, et: et,type:'custom' },
             type: 'custom',
         }
 
@@ -42,7 +43,7 @@ const UserNode = () => {
 
     return (
         <div className={`absolute top-0  lg:right-0 lg:bottom-0 p-4 ${visibility ? 'block' : 'hidden'}`}>
-            <div className='bg-white relative p-4 rounded-xl shadow-lg border-2 border-gray-200 '>
+            <div className='bg-white relative p-4 rounded-xl shadow-lg border-2 '>
                 <p className='text-lg font-medium '>Create Node</p>
                 <div className='my-2 flex flex-col gap-4'>
                     <div className='flex flex-col gap-1'>

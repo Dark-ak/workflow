@@ -49,26 +49,32 @@ export default function Workflow() {
             event.preventDefault();
             const nodeType = event.dataTransfer.getData('application/reactflow');
             let color;
+            let label;
             if (nodeType == "out") {
                 color = "#fed7aa"
+                label = "Output"
             };
             if (nodeType == "process") {
-                color = "#3b82f6"
+                color = "#bfdbfe"
+                label = "Process"
             }
             if (nodeType == "decision") {
                 color = "#fef08a"
+                label = "Decision"
             }
 
             const position = screenToFlowPosition({ x: event.clientX, y: event.clientY });
-
+            const id = Date.now().toString()
             const newNode = {
-                id: Date.now().toString(),
+                id: id,
                 type: nodeType,
                 position,
                 data: {
-                    label: `${nodeType}`, 
+                    id: id,
+                    label: label, 
                     color: color,
                     et: '5',
+                    type: nodeType
                 }
             }
 

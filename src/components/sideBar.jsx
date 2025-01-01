@@ -33,7 +33,7 @@ const SideBar = () => {
         const newNode = {
             id: Date.now().toString(),
             position: { x: parseFloat(Math.random() * 100), y: parseFloat(100) },
-            data: { label: label, color: color, et: '5' },
+            data: { label: label, color: color, et: '5' ,type: type},
             type: type,
         }
 
@@ -51,7 +51,7 @@ const SideBar = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                         </svg>                          
                     </div>
-                    <div className={`flex-col items-center gap-12 mx-2 hidden mt-4 lg:flex `}>
+                    <div className={`flex-col items-center gap-12 mx-2 hidden mt-4 lg:flex`}>
 
                         <div className='h-24 w-24  align-middle bg-blue-200 border border-blue-500 text-white flex items-center justify-center rounded-full shadow' onDragStart={(event) => handleDragStart(event, "process")} draggable>
                             <p>Process</p>

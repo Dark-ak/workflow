@@ -33,7 +33,7 @@ const EditNode = ({id, data,setEdit }) => {
 
         setEdit(false)
     };
-    console.log(node)
+
 
     return (
         <div className='bg-white border border-gray-200 px-4 py-3 rounded-md'>
@@ -60,7 +60,7 @@ const EditNode = ({id, data,setEdit }) => {
 
                 <div>
                     <div>
-                        <p className='text-gray-500 '>Execution Time(mins)</p>
+                        <p className='text-gray-500 '>Execution Time(sec)</p>
                         <input type="number" className='focus:outline-none bg-gray-100 rounded px-3 py-1' onChange={(e) => setEt(e.target.value)} defaultValue={et}/>
                     </div>
                 </div>

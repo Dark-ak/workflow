@@ -12,7 +12,7 @@ const validateConnection = (sourceType, targetType) => {
     if (sourceType === 'start' && targetType === 'end') return true; // Valid
     if (sourceType == 'decision' && targetType == 'decision') return false; // Invalid
     if (sourceType == 'start' && targetType == 'decision') return false;
-    if (sourceType == 'start' && targetType == 'out') return false;
+    if (sourceType == 'start' && targetType == 'output') return false;
     return true; // Default to allow other connections
 };
 

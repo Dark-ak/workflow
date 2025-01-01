@@ -5,6 +5,7 @@ import SideBar from './components/sideBar';
 import UserNode from './components/customNodes/userNode';
 import useWorkFlowStore from './utils/store';
 import Notify from './components/notify';
+import Charts from './components/charts';
 
 
 
@@ -27,8 +28,12 @@ export default function App() {
         <UserNode />
       </div>
 
+      <div className='absolute top-24 right-0'>
+        <Charts />
+      </div>
+
       <div>
-      <Notify />
+        <Notify />
       </div>
     </div>
   );
