@@ -1,10 +1,10 @@
-import React from 'react'
+
 import useNotification from '../utils/notification'
 
 
 const Notify = () => {
 
-  const { message, type, show, showNotification } = useNotification((state) => state);
+  const { message, type, show} = useNotification((state) => state);
   console.log(show)
   return (
     <div className='absolute left-1/2 bottom-0'>
