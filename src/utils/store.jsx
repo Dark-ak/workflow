@@ -22,43 +22,54 @@ const useWorkFlowStore = create((set, get) => ({
     ],
     edges: [],
     onNodesChange: (changes) => set({ nodes: applyNodeChanges(changes, get().nodes) }),
-    onEdgesChange: (changes) => set({ edges: applyEdgeChanges(changes, get().nodes) }),
+    onEdgesChange: (changes) => set({ edges: applyEdgeChanges(changes, get().edges) }),
     onConnect: (params) => {
         const state = get();
-
         const { nodes } = state;
-
+    
+        // Find source and target nodes
         const sourceNode = nodes.find((node) => node.id === params.source);
         const targetNode = nodes.find((node) => node.id === params.target);
-        const edgeType = params.sourceHandle
-        params.type = "smoothstep"
-
+        const edgeType = params.sourceHandle;
+    
+        // Ensure the edge has the correct type, default to 'smoothstep' if not specified
+        params.type = params.type || 'smoothstep';
+    
+        // Set additional edge properties
+        params.sourceLabel = sourceNode.data.label;
+        params.targetLabel = targetNode.data.label;
+        params.et = '5'; // Some value, ensure it's required
         params.markerEnd = {
             type: MarkerType.ArrowClosed,
             width: 20,
             height: 20,
-            color: edgeType == "No" ? 'red' : "green",
-        }
-        if (validateConnection(sourceNode.type,targetNode.type)) {
+            color: edgeType === 'No' ? 'red' : 'green',
+        };
+    
+        // Validate the connection between the nodes
+        if (validateConnection(sourceNode.type, targetNode.type)) {
             if (sourceNode.type === 'decision') {
-                
-                params.label = edgeType
-                
-                    params.labelStyle = {   // Background color
-                        padding: '5px',        // Padding for better appearance
-                        borderRadius: '3px',   // Optional: Rounded corners
-                        color: '#333',         // Font color
-                    },
-
-                    params.style = {
-                        "stroke": edgeType == "No" ? "red" : "green"
-                    }
-                set({ edges: addEdge(params, get().edges) })
+                params.label = edgeType;
+                params.labelStyle = {
+                    padding: '5px',
+                    borderRadius: '3px',
+                    color: '#333',
+                };
+                params.style = {
+                    stroke: edgeType === 'No' ? 'red' : 'green',
+                };
             }
-
-            set({ edges: addEdge(params, get().edges) })
+    
+            // Add edge to state
+            set({ edges: addEdge(params, get().edges) });
         }
     },
+    onEdgeClick: (event, edge) =>
+        set((state) => {
+            console.log(event)
+            return {edges: state.edges.filter((e) => e.id !== edge.id)}
+            
+        }),
     addNode: (node) => set(({ nodes: [...get().nodes, node] })),
     deleteNode: (nodeId) =>
         set((state) => {

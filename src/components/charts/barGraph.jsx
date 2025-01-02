@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { CartesianGrid, BarChart, Bar, XAxis, YAxis, Tooltip, Cell } from 'recharts';
+import { CartesianGrid, BarChart, Bar, XAxis, YAxis, Tooltip, Cell, Label } from 'recharts';
 import useWorkFlowStore from '../../utils/store';
 import { shallow } from 'zustand/shallow';
 import graphHover from '../../utils/hover';
@@ -9,7 +9,7 @@ const colour = {}
 
 const BarGraph = () => {
   const { nodes } = useWorkFlowStore((state) => state, shallow)
-  const {setHover, hover} = graphHover((state) => state)
+  const { setHover, hover } = graphHover((state) => state)
   const data = nodes.map((node) => node.data).slice(2);
   return (
 
@@ -24,15 +24,14 @@ const BarGraph = () => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="label" />
-          <YAxis />
+          <YAxis>
+            <Label value="Execution time (in seconds)" angle={-90} position="center" />
+            </YAxis>
           <Tooltip />
-          <Bar dataKey="et" fill='#3b82f6' onMouseEnter={(entry,_) => 
-            {setHover(entry.id)
-              console.log(hover)
-            }
-            }  onMouseLeave={() => setHover(false)} >
-            
-            
+          <Bar dataKey="et" fill='#3b82f6' onMouseEnter={(entry, _) => { setHover(entry.id) }
+          } onMouseLeave={() => setHover(false)} >
+
+
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}

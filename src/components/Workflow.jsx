@@ -31,11 +31,12 @@ export default function Workflow() {
         onNodesChange: state.onNodesChange,
         onEdgesChange: state.onEdgesChange,
         onConnect: state.onConnect,
-        addNode: state.addNode
+        addNode: state.addNode,
+        onEdgeClick: state.onEdgeClick
 
     });
 
-    const { nodes, edges, onNodesChange, onEdgesChange, onConnect, addNode } = useWorkFlowStore(useShallow(selector))
+    const { nodes, edges, onNodesChange, onEdgesChange, onConnect, addNode, onEdgeClick } = useWorkFlowStore(useShallow(selector))
     const { screenToFlowPosition } = useReactFlow();
 
 
@@ -83,7 +84,7 @@ export default function Workflow() {
         [addNode, screenToFlowPosition]
     )
 
-
+    console.log(edges)   
 
     const origin = [0.2, 0.2];
 
@@ -117,6 +118,7 @@ export default function Workflow() {
                 nodeOrigin={origin}
                 fitView="auto"
                 onNodeClick={(event, node) => console.log('click', node)}
+                onEdgeClick={(event, edge) => onEdgeClick(event, edge)}
             >
                 <MiniMap />
                 <Background variant="dots" gap={20} size={1} bgColor='#F5F5F5' />

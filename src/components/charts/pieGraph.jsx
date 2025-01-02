@@ -7,13 +7,11 @@ import { shallow } from 'zustand/shallow';
 const PieGraph = () => {
     let { nodes } = useWorkFlowStore((state) => state, shallow)
     const nodeData = nodes.map((node) => node.data).slice(2);
-    // console.log(nodeData)
     const typeColors = {
-        decision: "yellow",   // Blue
-        process: "blue", // Green
+        decision: "yellow",   
+        process: "blue", 
         out: "orange",
         custom: "red"
-        // Red
     };
     const executionTimeByType = nodeData.reduce((acc, node) => {
         console.log(node)
@@ -24,19 +22,18 @@ const PieGraph = () => {
         return acc;
     }, {});
     // Convert to array of objects
-    console.log(executionTimeByType)
+
     const data = Object.entries(executionTimeByType).map(([type, time]) => ({
         type,
         executionTime: time,
         color: typeColors[type],
     }));
-    console.log(data)
     return (
         <div className='flex items-center flex-col gap-4'>
             <div>
                 <p className='text-xl font-bold'>Execution Time by Types</p>
             </div>
-            <PieChart width={400} height={400}>
+            <PieChart width={500} height={400}>
                 <Pie
                     data={data}
                     dataKey="executionTime"
