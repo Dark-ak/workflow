@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 
+body {overflow: hidden;}
 input:active{
     text-decoration: none;
 }

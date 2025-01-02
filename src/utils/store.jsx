@@ -5,14 +5,17 @@ import {
     MarkerType
 } from '@xyflow/react';
 import { create } from 'zustand';
+import useNotification from './notification';
 
 
 const validateConnection = (sourceType, targetType) => {
+    console.log(sourceType, targetType)
     // Define allowed connections here
-    if (sourceType === 'start' && targetType === 'end') return true; // Valid
-    if (sourceType == 'decision' && targetType == 'decision') return false; // Invalid
+    if (sourceType === 'start' && targetType === 'end') return true;
+    if (sourceType == 'decision' && targetType == 'decision') return false; 
     if (sourceType == 'start' && targetType == 'decision') return false;
-    if (sourceType == 'start' && targetType == 'output') return false;
+    if (sourceType == 'start' && targetType == 'out') return false;
+    if (sourceType == 'out' && targetType == 'out') return false;
     return true; // Default to allow other connections
 };
 
@@ -26,7 +29,7 @@ const useWorkFlowStore = create((set, get) => ({
     onConnect: (params) => {
         const state = get();
         const { nodes } = state;
-    
+        const { showNotification } = useNotification.getState();
         // Find source and target nodes
         const sourceNode = nodes.find((node) => node.id === params.source);
         const targetNode = nodes.find((node) => node.id === params.target);
@@ -62,6 +65,8 @@ const useWorkFlowStore = create((set, get) => ({
     
             // Add edge to state
             set({ edges: addEdge(params, get().edges) });
+        }else{
+            showNotification('Invalid connection', 'error');
         }
     },
     onEdgeClick: (event, edge) =>

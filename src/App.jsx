@@ -20,7 +20,7 @@ export default function App() {
 
 
   return (
-    <div>
+    <div className=''>
       <Workflow />
       <Topbar />
       <div className='absolute top-24 left-0'>
@@ -28,7 +28,7 @@ export default function App() {
         <UserNode />
       </div>
 
-      <div className='absolute top-24 right-0'>
+      <div className='absolute top-24 right-0 lg:block hidden'>
         <Charts />
       </div>
 

@@ -12,7 +12,6 @@ const Topbar = () => {
     const handleSave = () => {
         savetoLocalStorage()
         showNotification('Saved Successfully', 'success')
-        alert('Saved Successfully')
     }
 
     const handleReset = () => {

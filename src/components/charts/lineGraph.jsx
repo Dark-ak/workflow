@@ -35,7 +35,7 @@ const prepareChartData = (edges, nodes) => {
 
       return { name: `${sourceLabel} -> ${targetLabel}`, time: cumulativeTime };
     })
-    .filter((data) => data !== null);  // Remove any null data
+    .filter((data) => data !== null);
 };
 
 const LineGraph = () => {

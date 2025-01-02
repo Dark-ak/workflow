@@ -21,7 +21,6 @@ const PieGraph = () => {
         acc[node.type] += parseInt(node.et);
         return acc;
     }, {});
-    // Convert to array of objects
 
     const data = Object.entries(executionTimeByType).map(([type, time]) => ({
         type,
